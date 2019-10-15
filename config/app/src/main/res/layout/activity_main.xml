@@ -31,5 +31,19 @@
         android:id="@+id/fetchButton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display Version Parameter"
+        android:id="@+id/versionButton"
+        android:layout_below="@+id/fetchButton"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Force Fetch And Display"
+        android:id="@+id/forceFetchButton"
+        android:layout_below="@+id/versionButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

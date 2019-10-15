@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     // Remote Config keys
     private static final String LOADING_PHRASE_CONFIG_KEY = "loading_phrase";
     private static final String WELCOME_MESSAGE_KEY = "welcome_message";
+    private static final String VERSION_PARAMETER = "version_config";
     private static final String WELCOME_MESSAGE_CAPS_KEY = "welcome_message_caps";
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -61,6 +62,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fetchWelcome();
+            }
+        });
+
+
+        Button versionButton = findViewById(R.id.versionButton);
+        versionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayVersionMessage();
+            }
+        });
+
+        Button forceFetch = findViewById(R.id.forceFetchButton);
+        forceFetch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forceFetch();
             }
         });
 
@@ -117,11 +135,43 @@ public class MainActivity extends AppCompatActivity {
         // [END fetch_config_with_callback]
     }
 
+    private void forceFetch() {
+        mWelcomeTextView.setText(mFirebaseRemoteConfig.getString(LOADING_PHRASE_CONFIG_KEY));
+
+        // [START fetch_config_with_callback]
+        mFirebaseRemoteConfig.fetch(0).addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    mFirebaseRemoteConfig.activate().addOnCompleteListener(new OnCompleteListener<Boolean>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Boolean> task) {
+                            if (task.isSuccessful()) {
+                                boolean updated = task.getResult();
+                                Log.d(TAG, "Config params updated: " + updated);
+                                Toast.makeText(MainActivity.this, "Fetch and activate succeeded",
+                                        Toast.LENGTH_SHORT).show();
+                                displayVersionMessage();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Fetch failed",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(MainActivity.this, "Fetch failed",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        // [END fetch_config_with_callback]
+    }
+
     /**
      * Display a welcome message in all caps if welcome_message_caps is set to true. Otherwise,
      * display a welcome message as fetched from welcome_message.
      */
-     // [START display_welcome_message]
+    // [START display_welcome_message]
     private void displayWelcomeMessage() {
         // [START get_config_values]
         String welcomeMessage = mFirebaseRemoteConfig.getString(WELCOME_MESSAGE_KEY);
@@ -134,4 +184,13 @@ public class MainActivity extends AppCompatActivity {
         mWelcomeTextView.setText(welcomeMessage);
     }
     // [END display_welcome_message]
+
+
+    private void displayVersionMessage() {
+        // [START get_config_values]
+        String versionMessage = mFirebaseRemoteConfig.getString(VERSION_PARAMETER);
+        // [END get_config_values]
+
+        mWelcomeTextView.setText(versionMessage);
+    }
 }

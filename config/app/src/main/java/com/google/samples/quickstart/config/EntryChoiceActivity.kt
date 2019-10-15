@@ -12,14 +12,8 @@ class EntryChoiceActivity : BaseEntryChoiceActivity() {
                         "Java",
                         "Run the Firebase Remote Config quickstart written in Java.",
                         Intent(
-                            this,
-                            com.google.samples.quickstart.config.java.MainActivity::class.java)),
-                Choice(
-                        "Kotlin",
-                        "Run the Firebase Remote Config quickstart written in Kotlin.",
-                        Intent(
-                            this,
-                            com.google.samples.quickstart.config.kotlin.MainActivity::class.java))
+                                this,
+                                com.google.samples.quickstart.config.java.MainActivity::class.java))
         )
     }
 }
