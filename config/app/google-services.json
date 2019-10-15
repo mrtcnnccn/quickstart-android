@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "459383607411",
+    "firebase_url": "https://config-test-3f5e1.firebaseio.com",
+    "project_id": "config-test-3f5e1",
+    "storage_bucket": "config-test-3f5e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459383607411:android:4f57a719d3a5a2dae89a06",
+        "android_client_info": {
+          "package_name": "mert.quickstart.config"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459383607411-0afbo9e919tdqtsrgq5ecr9so1vd8o3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxPU2hbk9uSepwbywltINsOEgoGDQ_3w8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459383607411-0afbo9e919tdqtsrgq5ecr9so1vd8o3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
